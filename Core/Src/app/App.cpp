@@ -8,7 +8,14 @@ App::App(TIM_HandleTypeDef* htim, UART_HandleTypeDef* huart)
 	// Inicijalizacija modula
 	DebugLogger::getInstance().init(huart);
 
-	LOG("App Constructor Initialized\r\n");
+	LOG("\r\nApp Constructor Initialized\r\n");
+}
+
+void allocateArrayOnStack(MemoryMonitor& monitor)
+{
+	int array[100] = {0};
+
+	monitor.printMemoryUsage();
 }
 
 void App::init()
@@ -30,6 +37,8 @@ void App::init()
 	LOG("Current allocated memory: %d bytes\r\n", monitor.getCurrentAllocatedMemory());
 
 	monitor.printMemoryUsage();
+
+	allocateArrayOnStack(monitor);
 }
 
 void App::loop()

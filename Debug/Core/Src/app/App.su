@@ -1,0 +1,4 @@
+../Core/Src/app/App.cpp:4:1:App::App(TIM_HandleTypeDef*, UART_HandleTypeDef*)	32	static
+../Core/Src/app/App.cpp:14:6:void App::init()	40	static
+../Core/Src/app/App.cpp:36:6:void App::loop()	24	static
+../Core/Src/app/App.cpp:41:1:App::~App()	16	static

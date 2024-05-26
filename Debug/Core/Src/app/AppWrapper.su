@@ -1,0 +1,4 @@
+../Core/Src/app/AppWrapper.cpp:9:17:void App_Init()	16	static
+../Core/Src/app/AppWrapper.cpp:15:17:void App_Loop()	8	static
+../Core/Src/app/AppWrapper.cpp:20:17:void App_Deinit()	16	static
+../Core/Src/app/AppWrapper.cpp:26:17:void App_TIM2_IRQHandler()	8	static

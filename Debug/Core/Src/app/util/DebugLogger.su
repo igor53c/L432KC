@@ -1,0 +1,4 @@
+../Core/Src/app/util/DebugLogger.cpp:3:14:static DebugLogger& DebugLogger::getInstance()	8	static
+../Core/Src/app/util/DebugLogger.cpp:9:1:DebugLogger::DebugLogger()	16	static
+../Core/Src/app/util/DebugLogger.cpp:13:6:void DebugLogger::init(UART_HandleTypeDef*)	16	static
+../Core/Src/app/util/DebugLogger.cpp:20:6:)	156	static

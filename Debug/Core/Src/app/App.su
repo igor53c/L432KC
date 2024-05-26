@@ -1,5 +1,5 @@
 ../Core/Src/app/App.cpp:4:1:App::App(TIM_HandleTypeDef*, UART_HandleTypeDef*)	32	static
-../Core/Src/app/App.cpp:14:6:void allocateArrayOnStack(MemoryMonitor&)	416	static
-../Core/Src/app/App.cpp:21:6:void App::init()	40	static
-../Core/Src/app/App.cpp:44:6:void App::loop()	24	static
-../Core/Src/app/App.cpp:49:1:App::~App()	16	static
+../Core/Src/app/App.cpp:13:6:void allocateArrayOnStack(MemoryMonitor&)	1216	static
+../Core/Src/app/App.cpp:20:6:void App::init()	40	static
+../Core/Src/app/App.cpp:43:6:void App::loop()	24	static
+../Core/Src/app/App.cpp:48:1:App::~App()	16	static

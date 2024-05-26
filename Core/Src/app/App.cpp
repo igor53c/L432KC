@@ -5,7 +5,6 @@ App::App(TIM_HandleTypeDef* htim, UART_HandleTypeDef* huart)
 : timerManager(htim),
 				ledController(new LedController(LD3_GPIO_Port, LD3_Pin))
 {
-	// Inicijalizacija modula
 	DebugLogger::getInstance().init(huart);
 
 	LOG("\r\nApp Constructor Initialized\r\n");
@@ -13,7 +12,7 @@ App::App(TIM_HandleTypeDef* htim, UART_HandleTypeDef* huart)
 
 void allocateArrayOnStack(MemoryMonitor& monitor)
 {
-	int array[100] = {0};
+	int array[300] = {0};
 
 	monitor.printMemoryUsage();
 }

@@ -10,8 +10,7 @@ void LedController::toggleLed()
 {
 	HAL_GPIO_TogglePin(port, pin);
 	state = !state;
-	//LOG("Pin toggled at elapsed time: %lu ms\r\n", lastToggleTime)
-	;
+	//LOG("Pin toggled at elapsed time: %lu ms\r\n", lastToggleTime);
 }
 
 void LedController::update(uint32_t elapsedTime)

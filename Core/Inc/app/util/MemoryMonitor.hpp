@@ -12,6 +12,7 @@ extern char _sbss;
 extern char _ebss;
 extern char _sdata;
 extern char _edata;
+extern char _Min_Stack_Size;
 
 class MemoryMonitor
 {

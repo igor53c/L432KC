@@ -1,5 +1,6 @@
 #include "app/util/MemoryMonitor.hpp"
 #include "app/util/DebugLogger.hpp"
+#include <cstdint>
 
 MemoryMonitor& MemoryMonitor::getInstance()
 {
@@ -52,17 +53,22 @@ void MemoryMonitor::printMemoryUsage() const
 	// Heap size
 	unsigned int heapSize = mi.uordblks;
 	// Stack pointer
-	unsigned int stackPointer = reinterpret_cast<unsigned int>(__builtin_frame_address(0));
-	// Stack size
-	unsigned int stackSize = reinterpret_cast<unsigned int>(&_estack) - stackPointer;
+	uintptr_t stackPointer = reinterpret_cast<uintptr_t>(__builtin_frame_address(0));
+	// Total stack size
+	unsigned int totalStackSize = reinterpret_cast<uintptr_t>(&_estack) - reinterpret_cast<uintptr_t>(&_end);
+	// Used stack size
+	unsigned int usedStackSize = reinterpret_cast<uintptr_t>(&_estack) - stackPointer;
+	// Free stack size
+	unsigned int freeStackSize = totalStackSize - usedStackSize;
+
 	// BSS segment size
-	unsigned int bssSize = reinterpret_cast<unsigned int>(&_ebss) - reinterpret_cast<unsigned int>(&_sbss);
+	unsigned int bssSize = reinterpret_cast<uintptr_t>(&_ebss) - reinterpret_cast<uintptr_t>(&_sbss);
 	// Data segment size
-	unsigned int dataSize = reinterpret_cast<unsigned int>(&_edata) - reinterpret_cast<unsigned int>(&_sdata);
+	unsigned int dataSize = reinterpret_cast<uintptr_t>(&_edata) - reinterpret_cast<uintptr_t>(&_sdata);
 	// Total RAM size (64KB + 16KB = 80KB)
 	unsigned int totalRamSize = 64 * 1024 + 16 * 1024;
 	// Total used RAM
-	unsigned int totalUsedRam = heapSize + stackSize + bssSize + dataSize;
+	unsigned int totalUsedRam = heapSize + usedStackSize + bssSize + dataSize;
 	// Total free RAM
 	unsigned int totalFreeRam = totalRamSize - totalUsedRam;
 
@@ -70,8 +76,9 @@ void MemoryMonitor::printMemoryUsage() const
 	LOG("Total free space: %d bytes\r\n", mi.fordblks);
 	LOG("Total allocated space: %d bytes\r\n", mi.uordblks);
 	LOG("Heap size: %u bytes\r\n", heapSize);
-	LOG("Used stack size: %u bytes\r\n", stackSize);
-	LOG("Free stack size: %u bytes\r\n", reinterpret_cast<unsigned int>(&_estack) - stackPointer);
+	LOG("Total stack size: %u bytes\r\n", totalStackSize);
+	LOG("Used stack size: %u bytes\r\n", usedStackSize);
+	LOG("Free stack size: %u bytes\r\n", freeStackSize);
 	LOG("BSS size: %u bytes\r\n", bssSize);
 	LOG("Data size: %u bytes\r\n", dataSize);
 	LOG("Total used RAM: %u bytes\r\n", totalUsedRam);
@@ -85,4 +92,7 @@ void MemoryMonitor::printMemoryUsage() const
 	LOG("_ebss: %p\r\n", &_ebss);
 	LOG("_sdata: %p\r\n", &_sdata);
 	LOG("_edata: %p\r\n", &_edata);
+	LOG("_Min_Stack_Size: %p\r\n", &_Min_Stack_Size);
+	LOG("Stack Pointer: %p\r\n", reinterpret_cast<void*>(stackPointer));
 }
+
